@@ -1,0 +1,79 @@
+<html>
+		
+<body>
+
+<span>Book id</span> <input type="text" name="bookid" id="bookid"> 
+<span id="msg">Message here</span> <br><br>
+<span>Book name</span> <input type="text" name="bookname" id="bookname"> <br><br>
+<span>Price</span> <input type="text" name="price" id="price">
+<input type="button" value="update" id="update">
+
+</body>
+
+<script src="jquery-3.5.1.min.js"></script>
+<script>//our scrip will come here 
+
+// $(()=>{
+// console.log("Entered JS");
+
+$("#bookid").blur(()=>
+	{ 
+		console.log("entered blur event");
+		let input={bookid:$('#bookid').val()}
+		
+		let ajaxparameters={
+			data:input,
+			url:"http://localhost:900/getdetail",
+			dataType:'json',
+			success:(datafromserver)=>{
+				if(datafromserver.status===true)
+				{
+					console.log("Data recived");
+					$('#bookname').val(datafromserver.bookdetail.bookname);
+					$('#price').val(datafromserver.bookdetail.price);
+				}
+				else{
+					console.log("Book not found");
+					$('#msg').val("book id not fount");
+				}
+				},
+			error:(errorfromserver)=>{
+				console.log(errorfromserver);
+			}
+		}
+		
+		$.ajax(ajaxparameters);	
+		});
+
+		$("#update").click(()=>
+		{ 
+		console.log("entered click event");
+let input={bookid:$('#bookid').val(),bookname:$('#bookname').val(),price:$('#price').val()}
+		
+		let ajaxparameters={
+			data:input,
+			url:"http://localhost:900/update",
+			dataType:'json',
+			success:(datafromserver)=>{
+				if(datafromserver.status===true)
+				{
+					console.log("Data Updated");
+
+				}
+				else{
+					console.log("Update unsuccesful");
+				}
+				},
+			error:(errorfromserver)=>{
+				console.log(errorfromserver);
+			}
+		}
+		
+		$.ajax(ajaxparameters);	
+		});
+
+
+</script>
+
+
+</html>
