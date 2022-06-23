@@ -6,8 +6,8 @@ app.use(cors());
 
 const bodyParser = require('body-parser');
 
-app.listen(900,()=>{
-    console.log("server listening at port 900...");
+app.listen(800,()=>{
+    console.log("server listening at port 800...");
 });
 
 let dbparams={
