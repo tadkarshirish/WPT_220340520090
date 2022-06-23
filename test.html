@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!-- <script src="./java.js"></script> -->
+    <script>
+        $(() => {
+                console.log("page loaded");
+
+                $('#submit').click(() => {
+                    console.log("sumited");
+                            
+     let input = { empid: $('#empid').val(),empname:$('#empname').val(),empmob:$('#empmob').val()}            
+     console.log(input.empmob);
+
+                    let ajaxparameters = {
+                        data: input,
+                        url: 'http://localhost:900/insert',
+                        type: 'get',
+                        dataType: 'json',
+                        success: (datafromserver) => {
+                            if (datafromserver.status == true) {
+                                console.log("insert Succeful");
+                                $('#msg').text("Insert Succesfull");
+                            }
+                            else {
+                                console.log("Insert failed");
+                                $('#msg').text("Insert failed");
+                            }
+                        },
+                        error: (errorfromserver) => {
+                            console.log(errorfromserver);
+                            $('#msg').text("Error occured");
+                        }
+                    }
+                    $.ajax(ajaxparameters);
+                });
+
+
+    
+                $('#delete').click(() => {
+                console.log("delete button clicked");
+                let input = {empid: $('#empid').val()}
+                console.log(input.empid);
+                let ajaxparameters= {
+                    data: input,
+                    url: 'http://localhost:90/delete',
+                    type: 'get',
+                    dataType: 'json',
+                    success: (datafromserver) => {
+                        if(datafromserver.status === true){
+                            console.log("Delete Successful");
+                            $('#msg').text("Delete Successful");
+                        }
+                        else{
+                            console.log("Delete Unsuccessful");
+                            $('#msg').text("Delete Unsuccessful");
+                        }
+                    },
+                    error: (errorfromserver) => {
+                        console.log(errorfromserver);
+                        $('#msg').text("Error occurred");
+                    }
+                }
+                $.ajax(ajaxparameters);
+            });            
+
+
+            });
+    </script>
+
+</head>
+
+<body>
+    <h1>Practice Quotes</h1>
+    <input type="text" name="" id="empid" placeholder="ID"><br>
+    <input type="text" name="" id="empname" placeholder="name"><br>
+    <input type="text" name="" id="empmob" placeholder="mob"><br>
+    <span id="msg">Status here</span>
+    <input type="submit" value="insert" id="submit">
+    <input type="submit" value="Delet" id="delete">
+</body>
+
+</html>
