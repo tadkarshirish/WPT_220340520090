@@ -19,7 +19,7 @@ $("#bookid").blur(()=>
 		
 		let ajaxparameters={
 			data:input,
-			url:"http://localhost:900/getdetail",
+			url:"http://localhost:800/getdetail",
 			dataType:'json',
 			success:(datafromserver)=>{
 				if(datafromserver.status===true)
@@ -48,7 +48,7 @@ let input={bookid:$('#bookid').val(),bookname:$('#bookname').val(),price:$('#pri
 		
 		let ajaxparameters={
 			data:input,
-			url:"http://localhost:900/update",
+			url:"http://localhost:800/update",
 			dataType:'json',
 			success:(datafromserver)=>{
 				if(datafromserver.status===true)
